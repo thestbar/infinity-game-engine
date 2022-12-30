@@ -1,5 +1,7 @@
 package com.junkiedan.infinity;
 
+import com.junkiedan.components.FontRenderer;
+import com.junkiedan.components.SpriteRenderer;
 import com.junkiedan.renderer.Shader;
 import com.junkiedan.renderer.Texture;
 import com.junkiedan.util.Time;
@@ -28,6 +30,9 @@ public class LevelEditorScene extends Scene {
     private Shader defaultShader;
     private Texture testTexture;
 
+    GameObject testObj;
+    private boolean firstTime = true;
+
     // Important: Must be in counter-clockwise order
     private int[] elementArray = {
             /*
@@ -46,6 +51,13 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void init() {
+        System.out.println("Creating 'Test Object'");
+        this.testObj = new GameObject("Test Object");
+        this.testObj.addComponent(new SpriteRenderer());
+        this.testObj.addComponent(new FontRenderer());
+        this.addGameObjectToScene(this.testObj);
+
+
         this.camera = new Camera(new Vector2f());
         defaultShader = new Shader("assets/shaders/default.glsl");
         defaultShader.compile();
@@ -119,6 +131,19 @@ public class LevelEditorScene extends Scene {
         glBindVertexArray(0);
 
         defaultShader.detach();
+
+        if(firstTime) {
+            System.out.println("Creating game object #2");
+            GameObject go2 = new GameObject("GameObject Test 2");
+            go2.addComponent(new SpriteRenderer());
+            this.addGameObjectToScene(go2);
+            firstTime = false;
+        }
+
+
+        for(GameObject go : this.gameObjects) {
+            go.update(dt);
+        }
     }
 
 
