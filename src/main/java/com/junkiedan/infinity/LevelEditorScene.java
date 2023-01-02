@@ -1,6 +1,7 @@
 package com.junkiedan.infinity;
 
 import com.junkiedan.components.SpriteRenderer;
+import com.junkiedan.util.AssetPool;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
@@ -14,14 +15,14 @@ public class LevelEditorScene extends Scene {
     public void init() {
         this.camera = new Camera(new Vector2f());
 
-        int xOffset = 10;
-        int yOffset = 10;
+        int xOffset = 50;
+        int yOffset = 50;
 
         float totalWidth = (float) (600 - xOffset * 2);
         float totalHeight = (float) (300 - yOffset * 2);
 
-        float sizeX = totalWidth / 100.0f;
-        float sizeY = totalHeight / 100.0f;
+        float sizeX = totalWidth / 80.0f;
+        float sizeY = totalHeight / 80.0f;
 
         for(int x = 0; x < 100; x++) {
             for(int y = 0; y < 100; y++) {
@@ -35,10 +36,16 @@ public class LevelEditorScene extends Scene {
                 this.addGameObjectToScene(go);
             }
         }
+
+        loadResources();
+    }
+
+    private void loadResources() {
+        AssetPool.getShader("assets/shaders/default.glsl");
     }
     @Override
     public void update(float dt) {
-        System.out.println("FPS: " + (1.0f / dt));
+//        System.out.println("FPS: " + (1.0f / dt));
         for(GameObject go : this.gameObjects) {
             go.update(dt);
         }

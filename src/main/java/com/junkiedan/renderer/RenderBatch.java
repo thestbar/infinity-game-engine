@@ -2,6 +2,7 @@ package com.junkiedan.renderer;
 
 import com.junkiedan.components.SpriteRenderer;
 import com.junkiedan.infinity.Window;
+import com.junkiedan.util.AssetPool;
 import org.joml.Vector4f;
 
 import java.util.Vector;
@@ -34,8 +35,7 @@ public class RenderBatch {
     private Shader shader;
 
     public RenderBatch(int maxBatchSize) {
-        shader = new Shader("assets/shaders/default.glsl");
-        shader.compile();
+        shader = AssetPool.getShader("assets/shaders/default.glsl");
         this.sprites = new SpriteRenderer[maxBatchSize];
         this.maxBatchSize = maxBatchSize;
 
