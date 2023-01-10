@@ -1,5 +1,7 @@
 package com.junkiedan.infinity;
 
+import imgui.ImFontAtlas;
+import imgui.ImFontConfig;
 import imgui.ImGui;
 import imgui.ImGuiIO;
 import imgui.flag.ImGuiConfigFlags;
@@ -19,17 +21,31 @@ public class ImGuiLayer {
      public void initImGui() {
          ImGui.createContext();
          ImGuiIO io = ImGui.getIO();
+
+         io.setIniFilename("imgui.ini");
          io.addConfigFlags(ImGuiConfigFlags.ViewportsEnable);
 
-         imGuiImplGlfw.init(glfwWindow, true);
+         imGuiImplGlfw.init(this.glfwWindow, true);
+
+         // Change fonts and resize them
+         final ImFontAtlas fontAtlas = io.getFonts();
+         final ImFontConfig fontConfig = new ImFontConfig(); // Natively allocated object, should be destroyed
+
+         fontConfig.setGlyphRanges(fontAtlas.getGlyphRangesDefault());
+         fontConfig.setPixelSnapH(true);
+
+         fontAtlas.addFontFromFileTTF("assets/fonts/andale_mono.ttf", 16, fontConfig);
+
+
 
          imGuiImplGl3.init(GLSL_VERSION);
      }
 
-     public void update(float dt) {
+     public void update(float dt, Scene currentScene) {
          imGuiImplGlfw.newFrame();
          ImGui.newFrame();
 
+         currentScene.sceneImGui();
          ImGui.showDemoWindow();
 
          ImGui.render();
