@@ -8,11 +8,9 @@ import imgui.glfw.ImGuiImplGlfw;
 
 public class ImGuiLayer {
      private long glfwWindow;
-    private final String GLSL_VERSION = "#version 330 core";
-    private final ImGuiImplGlfw imGuiImplGlfw = new ImGuiImplGlfw();
-    private final ImGuiImplGl3 imGuiImplGl3 = new ImGuiImplGl3();
-
-     private boolean showText = false;
+     private final String GLSL_VERSION = "#version 330 core";
+     private final ImGuiImplGlfw imGuiImplGlfw = new ImGuiImplGlfw();
+     private final ImGuiImplGl3 imGuiImplGl3 = new ImGuiImplGl3();
 
      public ImGuiLayer(long glfwWindow) {
          this.glfwWindow = glfwWindow;
