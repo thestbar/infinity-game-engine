@@ -22,9 +22,11 @@ project.ext.lwjglNatives = "natives-macos"
 project.ext.imguiVersion = "1.86.6"
 
 dependencies {
+    // GSON
+    implementation 'com.google.code.gson:gson:2.10.1'
+
     // LWJGL stuff
     implementation platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
-
     implementation "org.lwjgl:lwjgl"
     implementation "org.lwjgl:lwjgl-assimp"
     implementation "org.lwjgl:lwjgl-glfw"
